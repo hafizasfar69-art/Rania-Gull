@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rania Gul ❤️ A Special Surprise</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;
+ background:#080609;
+ color:white;
+ font-family:Georgia,serif;
+}
+.page{
+ min-height:100vh;
+ display:flex;
+ flex-direction:column;
+ justify-content:center;
+ align-items:center;
+ text-align:center;
+ padding:22px;
+}
+#proposal{
+ display:none;
+ background:radial-gradient(circle,#4b1025,#080609 75%);
+}
+.card{
+ width:100%;
+ max-width:430px;
+ padding:27px 20px;
+ border:1px solid #d6ad67;
+ border-radius:25px;
+ background:#160b13;
+ box-shadow:0 0 30px #ff315544;
+}
+h1{
+ color:#ff5278;
+ text-shadow:0 0 18px #ff1744;
+}
+p{line-height:1.9;color:#f5dce5}
+.keys{
+ display:grid;
+ grid-template-columns:repeat(2,85px);
+ justify-content:center;
+ gap:18px;
+ margin:25px;
+}
+.heart{
+ height:85px;
+ background:#050505;
+ color:#ff3158;
+ border:2px solid #ff3158;
+ border-radius:22px;
+ font-size:25px;
+ font-weight:bold;
+ box-shadow:0 0 15px #ff174455;
+}
+.heart span{color:white}
+.action{
+ background:linear-gradient(45deg,#a30d39,#ed4568);
+ color:white;
+ border:1px solid #e9bd71;
+ border-radius:30px;
+ padding:14px 24px;
+ margin:8px;
+ font-size:16px;
+}
+.rose{
+ font-size:55px;
+ animation:glow 2s infinite alternate;
+}
+@keyframes glow{
+ to{transform:scale(1.12);filter:drop-shadow(0 0 15px red)}
+}
+.fall{
+ position:fixed;
+ top:-40px;
+ z-index:10;
+ pointer-events:none;
+ animation:fall linear forwards;
+}
+@keyframes fall{
+ to{transform:translateY(110vh) rotate(360deg);opacity:.2}
+}
+#answer{color:#ffd27d}
+</style>
+</head>
+
+<body>
+
+<!-- FIRST PAGE: SECRET CODE -->
+<section class="page" id="lock">
+<div class="card">
+<div class="rose">🖤</div>
+<h1>LOVE LOCK</h1>
+<p>A Secret Surprise For Rania Gul</p>
+<h3 style="color:#e9bd71">Enter Your Secret Code</h3>
+
+<div class="keys">
+<button class="heart" onclick="press(1)">♥<br><span>1</span></button>
+<button class="heart" onclick="press(2)">♥<br><span>2</span></button>
+<button class="heart" onclick="press(3)">♥<br><span>3</span></button>
+<button class="heart" onclick="press(4)">♥<br><span>4</span></button>
+</div>
+
+<p id="display">♡ ♡ ♡ ♡</p>
+<button class="action" onclick="unlock()">UNLOCK ❤️</button>
+<p id="message"></p>
+</div>
+</section>
+
+<!-- SECOND PAGE: PROPOSAL -->
+<section class="page" id="proposal">
+<div class="card">
+
+<div class="rose">🌹</div>
+<h1>Dear Rania Gul ❤️</h1>
+
+<p>A beautiful surprise is waiting for you...</p>
+
+<h2 style="color:#e9bd71">Someone Special ✨</h2>
+
+<p>
+Some people make ordinary moments feel magical.
+Your presence is special, and this little surprise
+is made to bring a beautiful smile to your face.
+</p>
+
+<div class="rose">💖</div>
+
+<h2 style="color:#ff6688">A Special Question For You</h2>
+
+<p>
+Rania, would you like to make this moment
+a beautiful memory?
+</p>
+
+<h2 style="color:#e9bd71">Will You Accept My Proposal? 💍</h2>
+
+<button class="action" onclick="answer('Thank you for this beautiful moment! ❤️')">
+YES ❤️
+</button>
+
+<button class="action" onclick="answer('Take your time. Your choice matters. 🌹')">
+LET ME THINK 🌹
+</button>
+
+<p id="answer"></p>
+
+<div class="rose">🌸</div>
+<p style="color:#e9bd71">Made with love ❤️</p>
+
+</div>
+</section>
+
+<script>
+let code="";
+
+function press(n){
+ if(code.length>=4)return;
+ code+=n;
+ document.getElementById("display").textContent=
+ "♥ ".repeat(code.length)+"♡ ".repeat(4-code.length);
+ if(code.length===4)unlock();
+}
+
+function unlock(){
+ if(code==="1234"){
+  document.getElementById("lock").style.display="none";
+  document.getElementById("proposal").style.display="flex";
+ }else{
+  document.getElementById("message").textContent=
+  "Wrong code! Try again ❤️";
+  code="";
+  document.getElementById("display").textContent="♡ ♡ ♡ ♡";
+ }
+}
+
+function answer(msg){
+ document.getElementById("answer").textContent=msg;
+}
+
+const emojis=["❤️","💖","🌹","🌸","✨","💕","🌷","💗","🦋"];
+
+setInterval(()=>{
+ if(document.getElementById("proposal").style.display!=="flex")return;
+
+ const item=document.createElement("div");
+ item.className="fall";
+ item.textContent=emojis[Math.floor(Math.random()*emojis.length)];
+ item.style.left=Math.random()*100+"vw";
+ item.style.fontSize=(18+Math.random()*22)+"px";
+ item.style.animationDuration=(4+Math.random()*5)+"s";
+
+ document.body.appendChild(item);
+ setTimeout(()=>item.remove(),9500);
+},350);
+</script>
+
+</body>
+</html>
